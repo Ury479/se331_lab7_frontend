@@ -1,54 +1,79 @@
 <template>
-  <div class="events-page">
-    <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">Events For Good</h1>
+  <div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
+    <!-- 背景装饰 -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
 
-    <div class="mb-6 flex justify-center">
-      <label class="text-gray-700 font-medium">
-        Page size:
-        <select v-model.number="perPageLocal" class="ml-2 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option :value="2">2</option>
-          <option :value="3">3</option>
-          <option :value="5">5</option>
-          <option :value="10">10</option>
-        </select>
-        events per page
-      </label>
-    </div>
-
-    <div v-if="events && events.length > 0" class="events-container max-w-4xl mx-auto">
-      <div v-for="event in events" :key="event.id" class="event-item mb-8 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-        <CategoryOrganizer :event="event" />
-        <EventCard :event="event" />
+    <div class="relative z-10">
+      <!-- 标题区域 -->
+      <div class="text-center py-12">
+        <h1 class="text-6xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl">
+          EVENTS FOR GOOD
+        </h1>
+        <div class="w-32 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto rounded-full"></div>
       </div>
-    </div>
 
-    <div v-else-if="events === null" class="text-center py-8">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
-      <p class="mt-4 text-gray-600">Loading events...</p>
-    </div>
+      <!-- 分页控制 -->
+      <div class="mb-8 flex justify-center">
+        <div class="bg-black/30 backdrop-blur-sm border border-cyan-400/30 rounded-lg p-4">
+          <label class="text-cyan-300 font-medium text-lg">
+            Page size:
+            <select v-model.number="perPageLocal" class="ml-3 px-4 py-2 bg-gray-800 border border-cyan-400/50 rounded-md text-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent">
+              <option :value="2" class="bg-gray-800">2</option>
+              <option :value="3" class="bg-gray-800">3</option>
+              <option :value="5" class="bg-gray-800">5</option>
+              <option :value="10" class="bg-gray-800">10</option>
+            </select>
+            <span class="ml-2 text-purple-300">events per page</span>
+          </label>
+        </div>
+      </div>
 
-    <div v-else class="text-center py-8">
-      <p class="text-gray-600">No events found.</p>
-    </div>
+      <!-- 事件列表 -->
+      <div v-if="events && events.length > 0" class="events-container max-w-6xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div v-for="event in events" :key="event.id" class="event-item group">
+            <div class="bg-black/40 backdrop-blur-sm border border-cyan-400/30 rounded-xl p-6 hover:border-purple-400/50 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-400/20">
+              <CategoryOrganizer :event="event" />
+              <EventCard :event="event" />
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="flex justify-center mt-8">
-      <div class="flex space-x-4">
-        <RouterLink
-          :to="{ name: 'event-list-view', query: { page: page - 1, perPage: perPageLocal } }"
-          rel="prev"
-          v-if="page != 1"
-          class="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors duration-200 no-underline"
-        >
-          &lt;&lt; Prev Page
-        </RouterLink>
-        <RouterLink
-          :to="{ name: 'event-list-view', query: { page: page + 1, perPage: perPageLocal } }"
-          rel="next"
-          v-if="hasNextPage"
-          class="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors duration-200 no-underline"
-        >
-          Next Page &gt;&gt;
-        </RouterLink>
+      <!-- 加载状态 -->
+      <div v-else-if="events === null" class="text-center py-16">
+        <div class="inline-block">
+          <div class="animate-spin rounded-full h-16 w-16 border-4 border-cyan-400 border-t-transparent mx-auto"></div>
+          <p class="mt-6 text-cyan-300 text-xl font-medium">Loading events...</p>
+        </div>
+      </div>
+
+      <!-- 空状态 -->
+      <div v-else class="text-center py-16">
+        <div class="text-6xl mb-4">🔍</div>
+        <p class="text-gray-400 text-xl">No events found.</p>
+      </div>
+
+      <!-- 分页按钮 -->
+      <div class="flex justify-center mt-12 pb-8">
+        <div class="flex space-x-4">
+          <RouterLink
+            :to="{ name: 'event-list-view', query: { page: page - 1, perPage: perPageLocal } }"
+            rel="prev"
+            v-if="page != 1"
+            class="px-6 py-3 bg-black/40 border border-cyan-400/50 rounded-lg text-cyan-300 hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 no-underline font-medium"
+          >
+            ← Prev Page
+          </RouterLink>
+          <RouterLink
+            :to="{ name: 'event-list-view', query: { page: page + 1, perPage: perPageLocal } }"
+            rel="next"
+            v-if="hasNextPage"
+            class="px-6 py-3 bg-black/40 border border-purple-400/50 rounded-lg text-purple-300 hover:bg-purple-400/10 hover:border-purple-400 transition-all duration-300 no-underline font-medium"
+          >
+            Next Page →
+          </RouterLink>
+        </div>
       </div>
     </div>
   </div>

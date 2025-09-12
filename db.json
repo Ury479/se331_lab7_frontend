@@ -76,6 +76,17 @@
       "time": "",
       "petsAllowed": false,
       "organizer": ""
+    },
+    {
+      "id": 0,
+      "category": "hi",
+      "title": "big",
+      "description": "dicl",
+      "location": "ok",
+      "date": "",
+      "time": "",
+      "petsAllowed": true,
+      "organizer": "Chiangmai"
     }
   ]
 }

@@ -4,10 +4,18 @@ defineProps<{ event: Event }>()
 </script>
 
 <template>
-  <div class="category-organizer bg-gradient-to-r from-blue-400 to-green-400 text-white px-4 py-2 rounded-md shadow-md mb-2">
+  <div class="category-organizer bg-gradient-to-r from-cyan-400/20 to-purple-500/20 border border-cyan-400/30 text-white px-6 py-4 rounded-xl shadow-lg mb-4 backdrop-blur-sm">
     <div class="flex justify-between items-center">
-      <span class="category font-semibold">{{ event.category }}</span>
-      <span class="organizer text-blue-100">{{ event.organizer }}</span>
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-500 rounded-lg flex items-center justify-center">
+          <span class="text-sm">🏷️</span>
+        </div>
+        <span class="category font-bold text-cyan-300 text-lg">{{ event.category.toUpperCase() }}</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="text-purple-300 text-sm font-medium">by</span>
+        <span class="organizer text-purple-300 font-bold text-lg">{{ event.organizer }}</span>
+      </div>
     </div>
   </div>
 </template>
