@@ -8,6 +8,7 @@ export default {
     extend: {
       boxShadow: {
         'sp': '0 3px 12px 0 rgba(0, 0, 0, 0.2)',
+        'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
       },
       fontFamily: {
         sans: ['Avenir', 'Helvetica', 'Arial', 'sans-serif'],
@@ -25,4 +26,4 @@ export default {
     },
   },
   plugins: [],
-} 
+}

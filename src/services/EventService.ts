@@ -1,9 +1,14 @@
 import axios from 'axios';
 import { type Event } from '@/types';
 
+const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+console.log('EventService baseURL:', baseURL);
+
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3000', // 假设本地 json-server 端口为 3000
+  baseURL: baseURL,
+  withCredentials: false,
   headers: {
+    Accept: 'application/json',
     'Content-Type': 'application/json',
   },
 });
@@ -18,4 +23,13 @@ export default {
   getAllEventIds() {
     return apiClient.get<Event[]>('/events');
   },
-}; 
+  saveEvent(event: Event) {
+    return apiClient.post<Event>('/events', event);
+  },
+  updateEvent(id: number, event: Event) {
+    return apiClient.put<Event>('/events/' + id, event);
+  },
+  deleteEvent(id: number) {
+    return apiClient.delete('/events/' + id);
+  },
+};

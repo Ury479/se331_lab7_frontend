@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import EventListView from '../views/EventListView.vue'
 import AboutView from '../views/AboutView.vue'
 import StudentListView from '../views/StudentListView.vue'
+import AddEventView from '../views/AddEventView.vue'
+import EventFormView from '../views/EventFormView.vue'
 import EventDetailView from '../views/event/DetailView.vue'
 import EventEditView from '../views/event/EditView.vue'
 import EventRegisterView from '../views/event/RegisterView.vue'
@@ -28,6 +30,16 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: AboutView,
+    },
+    {
+      path: '/add-event',
+      name: 'add-event',
+      component: AddEventView,
+    },
+    {
+      path: '/event-form',
+      name: 'event-form',
+      component: EventFormView,
     },
     {
       path: '/students',
