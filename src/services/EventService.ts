@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { type Event } from '@/types';
 
-const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
+const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080';
 console.log('EventService baseURL:', baseURL);
 
 const apiClient = axios.create({
@@ -16,6 +16,9 @@ const apiClient = axios.create({
 export default {
   getEvents(perPage: number, page: number) {
     return apiClient.get<Event[]>(`/events?_limit=${perPage}&_page=${page}&_sort=id&_order=asc`);
+  },
+  getEventsByKeyword(keyword: string, perPage: number, page: number) {
+    return apiClient.get<Event[]>(`/events?title=${keyword}&_limit=${perPage}&_page=${page}&_sort=id&_order=asc`)
   },
   getEvent(id: number) {
     return apiClient.get<Event>('/events/' + id);

@@ -45,13 +45,6 @@ const { message } = storeToRefs(store)
             class="px-6 py-3 bg-black/30 border border-pink-400/30 rounded-lg text-pink-300 hover:bg-pink-400/10 hover:border-pink-400 transition-all duration-300 font-bold text-lg no-underline"
             exact-active-class="bg-pink-400/20 border-pink-400 text-pink-200"
           >
-            NEW EVENT
-          </RouterLink>
-          <RouterLink
-            to="/event-form"
-            class="px-6 py-3 bg-black/30 border border-orange-400/30 rounded-lg text-orange-300 hover:bg-orange-400/10 hover:border-orange-400 transition-all duration-300 font-bold text-lg no-underline"
-            exact-active-class="bg-orange-400/20 border-orange-400 text-orange-200"
-          >
             EVENT FORM
           </RouterLink>
         </nav>
