@@ -17,6 +17,16 @@ const event = ref<Event>({
   organizer: ''
 })
 
+// 转换数据格式以匹配后端期望的字段名
+function prepareEventData(eventData: Event) {
+  const { petsAllowed, ...rest } = eventData
+  return {
+    ...rest,
+    petAllowed: petsAllowed // 后端期望 petAllowed 而不是 petsAllowed
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any // 临时使用 any 类型避免类型检查问题
+}
+
 const isSubmitting = ref(false)
 const errors = ref<Record<string, string>>({})
 
@@ -61,7 +71,10 @@ function saveEvent() {
 
   console.log('Submitting event:', event.value)
 
-  EventService.saveEvent(event.value)
+  const eventData = prepareEventData(event.value)
+  console.log('Prepared event data:', eventData)
+
+  EventService.saveEvent(eventData)
     .then((response) => {
       console.log('Event saved successfully:', response.data)
       router.push({ name: 'event-list-view' })

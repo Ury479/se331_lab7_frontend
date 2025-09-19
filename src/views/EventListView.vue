@@ -125,6 +125,7 @@ const hasNextPage = computed(() => {
 })
 
 function updateKeyword() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let queryFunction: Promise<any>
   console.log('updateKeyword called with:', { keyword: keyword.value, perPage: perPageLocal.value, page: page.value })
 
@@ -163,6 +164,11 @@ onMounted(() => {
   watchEffect(() => {
     updateKeyword()
   })
+})
+
+// 监听路由变化，当从其他页面返回时刷新数据
+watch(() => route.path, () => {
+  updateKeyword()
 })
 
 watch(perPageLocal, (newVal) => {
