@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import EventService from '@/services/EventService'
+import ImageUpload from '@/components/ImageUpload.vue'
 
 const event = ref<Event>({
   id: 0,
@@ -14,7 +15,8 @@ const event = ref<Event>({
   date: '',
   time: '',
   petsAllowed: false,
-  organizer: ''
+  organizer: '',
+  images: []
 })
 
 // 转换数据格式以匹配后端期望的字段名
@@ -229,6 +231,12 @@ const isDev = import.meta.env.DEV
                 ]"
               />
               <p v-if="errors.organizer" class="text-red-400 text-sm mt-2">{{ errors.organizer }}</p>
+            </div>
+
+            <!-- Images Upload -->
+            <div>
+              <h3 class="text-3xl font-bold text-cyan-400 mb-4">The image of the Event</h3>
+              <ImageUpload v-model="event.images" />
             </div>
 
             <!-- Pets Allowed Toggle -->

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { type Event } from '@/types';
 
-const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080';
+const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000';
 console.log('EventService baseURL:', baseURL);
 
 const apiClient = axios.create({

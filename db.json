@@ -9,7 +9,12 @@
       "date": "January 28, 2022",
       "time": "12:00",
       "petsAllowed": true,
-      "organizer": "Kat Laydee"
+      "organizer": "Kat Laydee",
+      "images": [
+        "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400",
+        "https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=400",
+        "https://images.unsplash.com/photo-1573865526739-10c1dd7aa7c0?w=400"
+      ]
     },
     {
       "id": "4582797",
@@ -67,26 +72,20 @@
       "organizer": "Brody Kill"
     },
     {
-      "id": 0,
-      "category": "Fuck",
-      "title": "HIi!!!",
-      "description": "Ury",
-      "location": "ChaingMai",
-      "date": "",
-      "time": "",
+      "id": "2024001",
+      "category": "technology",
+      "title": "Tech Conference 2024",
+      "description": "Join us for an exciting technology conference featuring the latest innovations in AI, web development, and cloud computing. Network with industry leaders and learn from expert speakers.",
+      "location": "Silicon Valley Convention Center",
+      "date": "October 15, 2024",
+      "time": "09:00",
       "petsAllowed": false,
-      "organizer": ""
-    },
-    {
-      "id": 0,
-      "category": "hi",
-      "title": "big",
-      "description": "dicl",
-      "location": "ok",
-      "date": "",
-      "time": "",
-      "petsAllowed": true,
-      "organizer": "Chiangmai"
+      "organizer": "Tech Events Inc",
+      "images": [
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400",
+        "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400",
+        "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=400"
+      ]
     }
   ]
 }

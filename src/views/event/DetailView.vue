@@ -111,6 +111,20 @@
             <p class="text-gray-200 text-lg leading-relaxed font-medium">{{ props.event.description }}</p>
           </div>
         </div>
+
+        <!-- 图片列表 -->
+        <div v-if="props.event.images && props.event.images.length" class="mt-8 border-t border-cyan-400/30 pt-8">
+          <h3 class="text-2xl font-bold text-cyan-400 mb-6">Event Images</h3>
+          <div class="flex flex-row flex-wrap justify-start gap-4">
+            <img
+              v-for="image in props.event.images"
+              :key="image"
+              :src="image"
+              alt="events image"
+              class="border-solid border-gray-200 border-2 rounded p-1 m-1 w-40 hover:shadow-lg"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>

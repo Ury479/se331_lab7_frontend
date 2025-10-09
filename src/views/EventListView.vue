@@ -210,11 +210,11 @@ function updateKeyword() {
 
   if (keyword.value === '') {
     console.log('📡 API Call: Fetching all events')
-    console.log('🌐 Request URL:', `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080'}/events?_limit=${perPageLocal.value}&_page=${page.value}&_sort=id&_order=asc`)
+    console.log('🌐 Request URL:', `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/events?_limit=${perPageLocal.value}&_page=${page.value}&_sort=id&_order=asc`)
     queryFunction = EventService.getEvents(perPageLocal.value, page.value)
   } else {
     console.log('🔎 API Call: Searching events with keyword:', keyword.value)
-    console.log('🌐 Request URL:', `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080'}/events?title=${keyword.value}&_limit=${perPageLocal.value}&_page=${page.value}&_sort=id&_order=asc`)
+    console.log('🌐 Request URL:', `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/events?title=${keyword.value}&_limit=${perPageLocal.value}&_page=${page.value}&_sort=id&_order=asc`)
     queryFunction = EventService.getEventsByKeyword(keyword.value, perPageLocal.value, page.value)
   }
 
