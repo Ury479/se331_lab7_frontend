@@ -18,32 +18,46 @@ const { message } = storeToRefs(store)
         </div>
 
         <!-- 导航链接 -->
-        <nav class="flex justify-center space-x-8">
+        <nav class="flex justify-center space-x-4 flex-wrap">
           <RouterLink
             to="/"
-            class="px-6 py-3 bg-black/30 border border-cyan-400/30 rounded-lg text-cyan-300 hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 font-bold text-lg no-underline"
+            class="px-5 py-3 bg-black/30 border border-cyan-400/30 rounded-lg text-cyan-300 hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 font-bold text-base no-underline"
             exact-active-class="bg-cyan-400/20 border-cyan-400 text-cyan-200"
           >
             EVENTS
           </RouterLink>
           <RouterLink
+            to="/organizers"
+            class="px-5 py-3 bg-black/30 border border-indigo-400/30 rounded-lg text-indigo-300 hover:bg-indigo-400/10 hover:border-indigo-400 transition-all duration-300 font-bold text-base no-underline"
+            exact-active-class="bg-indigo-400/20 border-indigo-400 text-indigo-200"
+          >
+            ORGANIZERS
+          </RouterLink>
+          <RouterLink
+            to="/organizer-form"
+            class="px-5 py-3 bg-black/30 border border-pink-400/30 rounded-lg text-pink-300 hover:bg-pink-400/10 hover:border-pink-400 transition-all duration-300 font-bold text-base no-underline"
+            exact-active-class="bg-pink-400/20 border-pink-400 text-pink-200"
+          >
+            ADD ORGANIZER
+          </RouterLink>
+          <RouterLink
             :to="{ name: 'about' }"
-            class="px-6 py-3 bg-black/30 border border-purple-400/30 rounded-lg text-purple-300 hover:bg-purple-400/10 hover:border-purple-400 transition-all duration-300 font-bold text-lg no-underline"
+            class="px-5 py-3 bg-black/30 border border-purple-400/30 rounded-lg text-purple-300 hover:bg-purple-400/10 hover:border-purple-400 transition-all duration-300 font-bold text-base no-underline"
             exact-active-class="bg-purple-400/20 border-purple-400 text-purple-200"
           >
             ABOUT
           </RouterLink>
           <RouterLink
             to="/students"
-            class="px-6 py-3 bg-black/30 border border-green-400/30 rounded-lg text-green-300 hover:bg-green-400/10 hover:border-green-400 transition-all duration-300 font-bold text-lg no-underline"
+            class="px-5 py-3 bg-black/30 border border-green-400/30 rounded-lg text-green-300 hover:bg-green-400/10 hover:border-green-400 transition-all duration-300 font-bold text-base no-underline"
             exact-active-class="bg-green-400/20 border-green-400 text-green-200"
           >
             STUDENT
           </RouterLink>
           <RouterLink
             to="/event-form"
-            class="px-6 py-3 bg-black/30 border border-pink-400/30 rounded-lg text-pink-300 hover:bg-pink-400/10 hover:border-pink-400 transition-all duration-300 font-bold text-lg no-underline"
-            exact-active-class="bg-pink-400/20 border-pink-400 text-pink-200"
+            class="px-5 py-3 bg-black/30 border border-yellow-400/30 rounded-lg text-yellow-300 hover:bg-yellow-400/10 hover:border-yellow-400 transition-all duration-300 font-bold text-base no-underline"
+            exact-active-class="bg-yellow-400/20 border-yellow-400 text-yellow-200"
           >
             EVENT FORM
           </RouterLink>
