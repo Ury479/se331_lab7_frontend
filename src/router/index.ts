@@ -14,6 +14,7 @@ import OrganizerDetailView from '../views/organizer/DetailView.vue'
 import OrganizerLayoutView from '../views/organizer/LayoutView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import NetworkErrorView from '../views/NetworkErrorView.vue'
+import LoginView from '../views/LoginView.vue'
 import NProgress from 'nprogress'
 import EventService from '../services/EventService'
 import OrganizerService from '../services/OrganizerService'
@@ -23,6 +24,11 @@ import { useOrganizerStore } from '../stores/organizer'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
+    },
     {
       path: '/',
       name: 'event-list-view',
