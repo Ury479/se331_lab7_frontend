@@ -9,16 +9,10 @@ defineProps<ErrorMessageProps>()
 <template>
   <p
     aria-live="assertive"
-    class="errorMessage"
+    class="text-sm text-red-600 mt-1"
     :id="id"
   >
     <slot />
   </p>
 </template>
-
-<style scoped>
-.errorMessage {
-  @apply text-sm text-red-600 mt-1;
-}
-</style>
 

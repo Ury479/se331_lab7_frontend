@@ -3,6 +3,10 @@ import UniqueID from '@/features/UniqueID'
 import ErrorMessage from '@/components/ErrorMessage.vue'
 import { computed } from 'vue'
 
+defineOptions({
+  inheritAttrs: false
+})
+
 const modelValue = defineModel<string>()
 
 interface Props {
@@ -19,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text'
 })
 
-const uuid = UniqueID()
+const uuid = UniqueID().getID()
 const placeholderErrorClass = computed(() => ({
   'border-red-300 text-red-900 placeholder:text-red-300 focus:border-red-500 focus:ring-red-500': !!props.error,
   'border-gray-300 focus:border-indigo-600 focus:ring-indigo-600': !props.error
@@ -39,7 +43,7 @@ const isError = computed(() => !!props.error)
       :required="required"
       :aria-invalid="isError ? 'true' : 'false'"
       :aria-describedby="isError ? `${uuid}-error` : undefined"
-      :class="placeholderErrorClass"
+      :class="[placeholderErrorClass, $attrs.class]"
       class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none sm:text-sm sm:leading-6"
     />
     <div

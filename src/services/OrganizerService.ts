@@ -1,42 +1,38 @@
-import axios from 'axios'
 import type { Organizer } from '@/types/Organizer'
+import apiClient from './AxiosClient'
 
-const baseURL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080'
-
-const apiClient = axios.create({
-  baseURL: baseURL,
-  withCredentials: false,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
+// If your backend exposes a prefix like /api/v1, prefer to include it here once.
+// Example: const API_PREFIX = '/api/v1'
+// For now we keep empty because VITE_BACKEND_URL may already contain the prefix.
+const API_PREFIX = '/api/v1'
 
 export default {
   getOrganizers(perPage: number, page: number) {
-    return apiClient.get<Organizer[]>(`/organizers?_limit=${perPage}&_page=${page}&_sort=id&_order=asc`)
+    return apiClient.get<Organizer[]>(
+      `${API_PREFIX}/organizers?_limit=${perPage}&_page=${page}&_sort=id&_order=asc`
+    )
   },
 
   getOrganizersByKeyword(keyword: string, perPage: number, page: number) {
     return apiClient.get<Organizer[]>(
-      `/organizers?name=${keyword}&_limit=${perPage}&_page=${page}&_sort=id&_order=asc`
+      `${API_PREFIX}/organizers?name=${keyword}&_limit=${perPage}&_page=${page}&_sort=id&_order=asc`
     )
   },
 
   getOrganizer(id: number) {
-    return apiClient.get<Organizer>(`/organizers/${id}`)
+    return apiClient.get<Organizer>(`${API_PREFIX}/organizers/${id}`)
   },
 
   saveOrganizer(organizer: Organizer) {
-    return apiClient.post<Organizer>('/organizers', organizer)
+    return apiClient.post<Organizer>(`${API_PREFIX}/organizers`, organizer)
   },
 
   updateOrganizer(id: number, organizer: Organizer) {
-    return apiClient.put<Organizer>(`/organizers/${id}`, organizer)
+    return apiClient.put<Organizer>(`${API_PREFIX}/organizers/${id}`, organizer)
   },
 
   deleteOrganizer(id: number) {
-    return apiClient.delete(`/organizers/${id}`)
+    return apiClient.delete(`${API_PREFIX}/organizers/${id}`)
   }
 }
 

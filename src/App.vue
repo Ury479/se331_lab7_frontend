@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
+import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import { SpeedInsights } from '@vercel/speed-insights/vue'
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiAccountPlus, mdiLogin, mdiAccount, mdiLogout } from '@mdi/js'
+
 const store = useMessageStore()
 const { message } = storeToRefs(store)
+const authStore = useAuthStore()
+const router = useRouter()
+
+const logout = () => {
+  authStore.logout()
+  router.push({ name: 'login' })
+}
 </script>
 
 <template>
@@ -18,7 +30,63 @@ const { message } = storeToRefs(store)
         </div>
 
         <!-- 导航链接 -->
-        <nav class="flex justify-center space-x-4 flex-wrap">
+        <div class="wrapper">
+          <nav class="py-6">
+            <!-- 未登录时显示 Sign Up 和 Login -->
+            <nav v-if="!authStore.currentUserName" class="flex">
+              <ul class="flex navbar-nav ml-auto">
+                <li class="nav-item px-2">
+                  <RouterLink to="/register" class="nav-link">
+                    <div class="flex items-center">
+                      <SvgIcon type="mdi" :path="mdiAccountPlus" />
+                      <span class="ml-3">Sign Up</span>
+                    </div>
+                  </RouterLink>
+                </li>
+                <li class="nav-item px-2">
+                  <RouterLink to="/login" class="nav-link">
+                    <div class="flex items-center">
+                      <SvgIcon type="mdi" :path="mdiLogin" />
+                      <span class="ml-3">Login</span>
+                    </div>
+                  </RouterLink>
+                </li>
+              </ul>
+            </nav>
+
+            <!-- 已登录时显示用户信息 -->
+            <nav v-if="authStore.currentUserName" class="flex">
+              <ul class="flex navbar-nav ml-auto">
+                <li class="nav-item px-2">
+                  <RouterLink to="/profile" class="nav-link">
+                    <div class="flex items-center">
+                      <SvgIcon type="mdi" :path="mdiAccount" />
+                      <span class="ml-3">{{ authStore.currentUserName }}</span>
+                    </div>
+                  </RouterLink>
+                </li>
+                <li class="nav-item px-2">
+                  <a class="nav-link hover:cursor-pointer" @click="logout">
+                    <div class="flex items-center">
+                      <SvgIcon type="mdi" :path="mdiLogout" />
+                      <span class="ml-3">LogOut</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </nav>
+          <RouterLink
+            class="font-bold text-gray-300 hover:text-white transition-colors"
+            exact-active-class="text-green-400"
+            to="/"
+          >
+            Home
+          </RouterLink>
+        </div>
+
+        <!-- 原有导航链接 -->
+        <nav class="flex justify-center space-x-4 flex-wrap mt-4">
           <RouterLink
             to="/"
             class="px-5 py-3 bg-black/30 border border-cyan-400/30 rounded-lg text-cyan-300 hover:bg-cyan-400/10 hover:border-cyan-400 transition-all duration-300 font-bold text-base no-underline"
@@ -83,6 +151,25 @@ const { message } = storeToRefs(store)
 
 .animate-fade {
   animation: fadeIn 0.5s ease-out;
+}
+
+/* 导航链接样式 */
+.nav-link {
+  @apply px-4 py-2 text-gray-300 hover:text-white transition-colors duration-200 rounded-lg hover:bg-white/10;
+}
+
+.nav-link.router-link-active {
+  @apply text-green-400 bg-white/5;
+}
+
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  @apply flex items-center justify-between px-4;
 }
 
 /* 背景图案 */

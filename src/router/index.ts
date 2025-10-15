@@ -15,6 +15,8 @@ import OrganizerLayoutView from '../views/organizer/LayoutView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 import NetworkErrorView from '../views/NetworkErrorView.vue'
 import LoginView from '../views/LoginView.vue'
+import RegisterView from '../views/RegisterView.vue'
+import ProfileView from '../views/ProfileView.vue'
 import NProgress from 'nprogress'
 import EventService from '../services/EventService'
 import OrganizerService from '../services/OrganizerService'
@@ -28,6 +30,21 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView
+    },
+    {
+      path: '/login-demo',
+      name: 'login-demo',
+      component: () => import('../views/LoginViewDemo.vue')
     },
     {
       path: '/',
