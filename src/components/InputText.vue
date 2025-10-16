@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import UniqueID from '@/features/UniqueID'
-import ErrorMessage from '@/components/ErrorMessage.vue'
+// InputText: controlled text input using defineModel, with error styles & ARIA.
+// We only change the id generator to avoid calling ".getID()" on a non-object.
+
 import { computed } from 'vue'
+import { useUniqueId } from '@/composables/useUniqueId' // <-- use our composable
+import ErrorMessage from '@/components/ErrorMessage.vue'
 
-defineOptions({
-  inheritAttrs: false
-})
+defineOptions({ inheritAttrs: false })
 
+// v-model for parent control
 const modelValue = defineModel<string>()
 
 interface Props {
@@ -23,7 +25,9 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text'
 })
 
-const uuid = UniqueID().getID()
+// ✅ generate a string id; DO NOT call ".getID()"
+const uuid = useUniqueId('input')
+
 const placeholderErrorClass = computed(() => ({
   'border-red-300 text-red-900 placeholder:text-red-300 focus:border-red-500 focus:ring-red-500': !!props.error,
   'border-gray-300 focus:border-indigo-600 focus:ring-indigo-600': !props.error
@@ -64,6 +68,7 @@ const isError = computed(() => !!props.error)
       </svg>
     </div>
   </div>
+
   <ErrorMessage
     v-if="error"
     class="inline-flex text-sm text-red-700 mt-2"
@@ -72,4 +77,3 @@ const isError = computed(() => !!props.error)
     {{ error }}
   </ErrorMessage>
 </template>
-

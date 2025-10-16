@@ -61,6 +61,9 @@ export const useAuthStore = defineStore('auth', {
         // persist to localStorage so refresh survives reload
         localStorage.setItem('accessToken', this.token)
         localStorage.setItem('refreshToken', this.refreshToken!)
+        // also persist in snake_case to match backend guideline
+        localStorage.setItem('access_token', this.token)
+        if (this.refreshToken) localStorage.setItem('refresh_token', this.refreshToken)
 
         // store user information
         if (this.user) {
@@ -87,6 +90,8 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('accessToken')
       localStorage.removeItem('refreshToken')
       localStorage.removeItem('user')
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('refresh_token')
     },
 
     /** Initialize auth state from localStorage on app start */
@@ -108,6 +113,14 @@ export const useAuthStore = defineStore('auth', {
           localStorage.removeItem('user')
         }
       }
+    },
+    /** Optional: reload state directly (compatible with the screenshot requirement) */
+    reload(token: string, user: Organizer) {
+      this.token = token
+      this.user = user
+      localStorage.setItem('accessToken', token)
+      localStorage.setItem('access_token', token)
+      localStorage.setItem('user', JSON.stringify(user))
     },
   },
 })
